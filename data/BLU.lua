@@ -22,7 +22,7 @@ function job_setup()
     state.Buff['Unbridled Learning'] = buffactive['Unbridled Learning'] or false
 	state.Buff['Unbridled Wisdom'] = buffactive['Unbridled Wisdom'] or false
 	
-	--List of which WS you plan to use TP bonus WS with.
+	--List of which WS you plan to use TP bonus WS equipment with.
 	moonshade_ws = S{'Chant du Cygne', 'Savage Blade','Requiescat'}
 	
 	state.LearningMode = M(false, 'Learning Mode')
@@ -33,7 +33,7 @@ function job_setup()
     
     -- Mappings for gear sets to use for various blue magic spells.
     -- While Str isn't listed for each, it's generally assumed as being at least
-    -- moderately signficant, even for spells with other mods.
+    -- moderately signficant, even for spells with other mods, if only for pDif.
     
     -- Physical Spells --
     
@@ -42,7 +42,7 @@ function job_setup()
         'Bilgestorm'
     }
 
-    -- Spells with heavy accuracy penalties, that need to prioritize accuracy first.
+    -- Spells with heavy accuracy penalties, that need to prioritize accuracy.
     blue_magic_maps.PhysicalAcc = S{
         'Heavy Strike',
     }
@@ -183,7 +183,7 @@ function job_setup()
 
 	update_melee_groups()
 	update_combat_form()
-	init_job_states({"Capacity","AutoRuneMode","AutoTrustMode","AutoWSMode","AutoFoodMode","AutoNukeMode","AutoStunMode","AutoDefenseMode"},{"OffenseMode","WeaponskillMode","IdleMode","Passive","RuneElement","LearningMode","CastingMode","TreasureMode"})
+	init_job_states({"Capacity","AutoRuneMode","AutoTrustMode","AutoWSMode","AutoFoodMode","AutoNukeMode","AutoStunMode","AutoDefenseMode","AutoBuffMode",},{"OffenseMode","WeaponskillMode","IdleMode","Passive","RuneElement","LearningMode","CastingMode","TreasureMode"})
 end
 
 -------------------------------------------------------------------------------------------------------------------

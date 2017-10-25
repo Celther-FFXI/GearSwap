@@ -22,7 +22,7 @@ function job_setup()
 	autows = 'Vidohunir'
 	autofood = 'Pear Crepe'
 	
-	init_job_states({"Capacity","AutoRuneMode","AutoTrustMode","AutoNukeMode","AutoWSMode","AutoFoodMode","AutoStunMode","AutoDefenseMode"},{"OffenseMode","WeaponskillMode","IdleMode","Passive","RuneElement","RecoverMode","ElementalMode","CastingMode","TreasureMode",})
+	init_job_states({"Capacity","AutoRuneMode","AutoTrustMode","AutoNukeMode","AutoWSMode","AutoFoodMode","AutoStunMode","AutoDefenseMode","AutoBuffMode",},{"OffenseMode","WeaponskillMode","IdleMode","Passive","RuneElement","RecoverMode","ElementalMode","CastingMode","TreasureMode",})
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -96,7 +96,7 @@ function job_post_midcast(spell, spellMap, eventArgs)
 		elseif is_nuke(spell, spellMap) and spell.english ~= 'Impact' then
 			if state.MagicBurstMode.value ~= 'Off' then equip(sets.MagicBurst) end
 
-			if player.hpp < 75 and player.tp < 1000 and (state.CastingMode.value == 'Normal' or state.CastingMode.value == 'Fodder') then
+			if player.hpp < 75 and player.tp < 1000 and state.CastingMode.value == 'Fodder' then
 				if item_available("Sorcerer's Ring") then
 					sets.SorcRing = {ring1="Sorcerer's Ring"}
 					equip(sets.SorcRing)
@@ -376,7 +376,12 @@ function handle_elemental(cmdParams)
 			end
 			
 		elseif state.ElementalMode.value == 'Light' then
-			add_to_chat(123,'Error: There are no light nukes.')
+			if spell_recasts[29] == 0 then
+				send_command('input /ma "Banish II" <t>')
+			elseif spell_recasts[28] == 0 then
+				send_command('input /ma "Banish" <t>')
+			end
+
 		elseif state.ElementalMode.value == 'Dark' then
 			if spell_recasts[219] == 0 then
 				send_command('input /ma "Comet" <t>')
@@ -429,7 +434,12 @@ function handle_elemental(cmdParams)
 			end
 			
 		elseif state.ElementalMode.value == 'Light' then
-			add_to_chat(123,'Error: There are no light nukes.')
+			if spell_recasts[29] == 0 then
+				send_command('input /ma "Banish II" <t>')
+			elseif spell_recasts[28] == 0 then
+				send_command('input /ma "Banish" <t>')
+			end
+
 		elseif state.ElementalMode.value == 'Dark' then
 			add_to_chat(123,'Error: There are no dark nukes.')
 		end

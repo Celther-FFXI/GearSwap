@@ -17,7 +17,7 @@ function job_setup()
     state.Buff['Aftermath: Lv.3'] = buffactive['Aftermath: Lv.3'] or false
     state.Buff.Hasso = buffactive.Hasso or false
     state.Buff.Seigan = buffactive.Seigan or false
-	state.Stance = M('Hasso','None','Seigan')
+	state.Stance = M{['description']='Stance','Hasso','Seigan','None'}
 	
 	--List of which WS you plan to use TP bonus WS with.
 	moonshade_ws = S{'Savage Blade','Requiescat','Resolution'}
@@ -28,7 +28,7 @@ function job_setup()
 	update_combat_form()
 	update_melee_groups()
 	
-	init_job_states({"Capacity","AutoRuneMode","AutoTrustMode","AutoWSMode","AutoFoodMode","AutoNukeMode","AutoStunMode","AutoDefenseMode"},{"OffenseMode","WeaponskillMode","IdleMode","Passive","RuneElement","CastingMode","TreasureMode",})
+	init_job_states({"Capacity","AutoRuneMode","AutoTrustMode","AutoWSMode","AutoFoodMode","AutoNukeMode","AutoStunMode","AutoDefenseMode","AutoBuffMode",},{"OffenseMode","WeaponskillMode","IdleMode","Passive","RuneElement","CastingMode","TreasureMode",})
 end
 	
 -------------------------------------------------------------------------------------------------------------------

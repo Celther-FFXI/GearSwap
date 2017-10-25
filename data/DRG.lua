@@ -16,7 +16,7 @@ function job_setup()
 	state.Buff['Spirit Surge'] = buffactive['Spirit Surge'] or false
     state.Buff.Hasso = buffactive.Hasso or false
     state.Buff.Seigan = buffactive.Seigan or false
-	state.Stance = M('Hasso','None','Seigan')
+	state.Stance = M{['description']='Stance','Hasso','Seigan','None'}
 	
 	--List of which WS you plan to use TP bonus WS with.
 	moonshade_ws = S{'Stardiver'}
@@ -27,7 +27,7 @@ function job_setup()
 	Breath_HPP = 60
 	update_combat_form()
 	update_melee_groups()
-	init_job_states({"Capacity","AutoRuneMode","AutoTrustMode","AutoWSMode","AutoFoodMode","AutoStunMode","AutoDefenseMode"},{"OffenseMode","WeaponskillMode","IdleMode","Passive","RuneElement","TreasureMode",})
+	init_job_states({"Capacity","AutoRuneMode","AutoTrustMode","AutoWSMode","AutoFoodMode","AutoStunMode","AutoDefenseMode","AutoBuffMode",},{"OffenseMode","WeaponskillMode","IdleMode","Passive","RuneElement","TreasureMode",})
 end
 
 -------------------------------------------------------------------------------------------------------------------

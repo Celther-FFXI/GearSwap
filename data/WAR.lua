@@ -20,7 +20,7 @@ function job_setup()
 	state.Buff['Aftermath: Lv.3'] = buffactive['Aftermath: Lv.3'] or false
     state.Buff.Hasso = buffactive.Hasso or false
     state.Buff.Seigan = buffactive.Seigan or false
-	state.Stance = M('Hasso','None','Seigan')
+	state.Stance = M{['description']='Stance','Hasso','Seigan','None'}
 	
 	--List of which WS you plan to use TP bonus WS with.
 	moonshade_ws = S{'Savage Blade','Upheaval','Ruinator','Resolution','Rampage','Raging Rush',"Ukko's Fury",}
@@ -28,7 +28,7 @@ function job_setup()
 	autows = "Ukko's Fury"
 	autofood = 'Soy Ramen'
 	
-	init_job_states({"Capacity","AutoRuneMode","AutoTrustMode","AutoWSMode","AutoFoodMode","AutoStunMode","AutoDefenseMode"},{"OffenseMode","WeaponskillMode","IdleMode","Passive","RuneElement","TreasureMode",})
+	init_job_states({"Capacity","AutoRuneMode","AutoTrustMode","AutoWSMode","AutoFoodMode","AutoStunMode","AutoDefenseMode","AutoBuffMode",},{"OffenseMode","WeaponskillMode","IdleMode","Passive","RuneElement","TreasureMode",})
 end
 	
 -------------------------------------------------------------------------------------------------------------------

@@ -270,7 +270,7 @@ function handle_elemental(cmdParams)
 		local spell_recasts = windower.ffxi.get_spell_recasts()
 
 		if state.ElementalMode.value == 'Fire' then
-			if spell_recasts[148] == 0 then
+			if spell_recasts[148] == 0 and player.job_points[(res.jobs[player.main_job_id].ens):lower()].jp_spent > 99 then
 				send_command('input /ma "Fire V" <t>')
 			elseif spell_recasts[147] == 0 then
 				send_command('input /ma "Fire IV" <t>')
@@ -283,7 +283,7 @@ function handle_elemental(cmdParams)
 			end
 
 		elseif state.ElementalMode.value == 'Wind' then
-			if spell_recasts[158] == 0 then
+			if spell_recasts[158] == 0 and player.job_points[(res.jobs[player.main_job_id].ens):lower()].jp_spent > 99 then
 				send_command('input /ma "Aero V" <t>')
 			elseif spell_recasts[157] == 0 then
 				send_command('input /ma "Aero IV" <t>')
@@ -296,7 +296,7 @@ function handle_elemental(cmdParams)
 			end
 
 		elseif state.ElementalMode.value == 'Lightning' then
-			if spell_recasts[168] == 0 then
+			if spell_recasts[168] == 0 and player.job_points[(res.jobs[player.main_job_id].ens):lower()].jp_spent > 99 then
 				send_command('input /ma "Thunder V" <t>')
 			elseif spell_recasts[167] == 0 then
 				send_command('input /ma "Thunder IV" <t>')
@@ -309,7 +309,7 @@ function handle_elemental(cmdParams)
 			end
 
 		elseif state.ElementalMode.value == 'Earth' then
-			if spell_recasts[163] == 0 then
+			if spell_recasts[163] == 0 and player.job_points[(res.jobs[player.main_job_id].ens):lower()].jp_spent > 99 then
 				send_command('input /ma "Stone V" <t>')
 			elseif spell_recasts[162] == 0 then
 				send_command('input /ma "Stone IV" <t>')
@@ -322,7 +322,7 @@ function handle_elemental(cmdParams)
 			end
 
 		elseif state.ElementalMode.value == 'Ice' then
-			if spell_recasts[153] == 0 then
+			if spell_recasts[153] == 0 and player.job_points[(res.jobs[player.main_job_id].ens):lower()].jp_spent > 99 then
 				send_command('input /ma "Blizzard V" <t>')
 			elseif spell_recasts[152] == 0 then
 				send_command('input /ma "Blizzard IV" <t>')
@@ -335,7 +335,7 @@ function handle_elemental(cmdParams)
 			end
 
 		elseif state.ElementalMode.value == 'Water' then
-			if spell_recasts[173] == 0 then
+			if spell_recasts[173] == 0 and player.job_points[(res.jobs[player.main_job_id].ens):lower()].jp_spent > 99 then
 				send_command('input /ma "Water V" <t>')
 			elseif spell_recasts[172] == 0 then
 				send_command('input /ma "Water IV" <t>')
@@ -348,7 +348,12 @@ function handle_elemental(cmdParams)
 			end
 
 		elseif state.ElementalMode.value == 'Light' then
-			add_to_chat(123,'Error: There are no light nukes.')
+			if spell_recasts[29] == 0 then
+				send_command('input /ma "Banish II" <t>')
+			elseif spell_recasts[28] == 0 then
+				send_command('input /ma "Banish" <t>')
+			end
+
 		elseif state.ElementalMode.value == 'Dark' then
 			add_to_chat(123,'Error: There are no dark nukes.')
 		end
@@ -399,7 +404,12 @@ function handle_elemental(cmdParams)
 			end
 
 		elseif state.ElementalMode.value == 'Light' then
-			add_to_chat(123,'Error: There are no light nukes.')
+			if spell_recasts[29] == 0 then
+				send_command('input /ma "Banish II" <t>')
+			elseif spell_recasts[28] == 0 then
+				send_command('input /ma "Banish" <t>')
+			end
+
 		elseif state.ElementalMode.value == 'Dark' then
 			add_to_chat(123,'Error: There are no dark nukes.')
 		end
@@ -780,13 +790,13 @@ end
 
 function check_geo()
 	if state.AutoBuffMode.value and not moving and not areas.Cities:contains(world.area) then
-		if not player.indi then
-			windower.chat.input('input /ma "Indi-'..indispell..'" <me>')
-			tickdelay = 90
+		if not player.indi and indispell ~= 'None' then
+			windower.chat.input('/ma "Indi-'..indispell..'" <me>')
+			tickdelay = 130
 			return true
-		elseif not pet.isvalid then
-			windower.chat.input('input /ma "Geo-'..geospell..'" <bt>')
-			tickdelay = 90
+		elseif not pet.isvalid and geospell ~= 'None' and (windower.ffxi.get_mob_by_target('bt') or geo_buffs:contains(geospell)) then
+			windower.chat.input('/ma "Geo-'..geospell..'" <bt>')
+			tickdelay = 140
 			return true
 		else
 			return false

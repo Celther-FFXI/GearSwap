@@ -37,7 +37,7 @@ function job_setup()
 	
 	state.AutoBulletMode = M(true,'Auto Bullet Mode')
 	
-	init_job_states({"Capacity","AutoRuneMode","AutoTrustMode","AutoWSMode","AutoFoodMode","RngHelper","AutoStunMode","AutoDefenseMode","LuzafRing"},{"OffenseMode","RangedMode","WeaponskillMode","ElementalMode","IdleMode","Passive","RuneElement","TreasureMode",})
+	init_job_states({"Capacity","AutoRuneMode","AutoTrustMode","AutoWSMode","AutoFoodMode","RngHelper","AutoStunMode","AutoDefenseMode","LuzafRing","AutoBuffMode",},{"OffenseMode","RangedMode","WeaponskillMode","ElementalMode","IdleMode","Passive","RuneElement","TreasureMode",})
 end
 
 
@@ -255,7 +255,7 @@ function do_bullet_checks(spell, spellMap, eventArgs)
   
 	local available_bullets = count_available_bullets(bullet_name)
 	
-  -- If no ammo is available, give appropriate warning and end.
+  -- If no ammo is available, give appropriate warning and cancel.
     if not (available_bullets > 0) then
         if spell.type == 'CorsairShot' and player.equipment.ammo ~= 'empty' then
             add_to_chat(217, 'No Quick Draw ammo available, using equipped ammo: ('..player.equipment.ammo..')')
@@ -279,7 +279,7 @@ function do_bullet_checks(spell, spellMap, eventArgs)
     
     -- Low ammo warning.
     if spell.type ~= 'CorsairShot' and (available_bullets > 0) and (available_bullets <= options.ammo_warning_limit) then
-        local msg = '*****  LOW AMMO WARNING: '..bullet_name..' *****'
+        local msg = '****  LOW AMMO WARNING: '..bullet_name..' ****'
         --local border = string.repeat("*", #msg)
         local border = ""
         for i = 1, #msg do
@@ -334,7 +334,7 @@ function count_available_bullets(bullet_name)
 	end
 
 	if player.wardrobe2[bullet_name] then
-		bullet_count = bullet_count + player.wardrobe3[bullet_name].count
+		bullet_count = bullet_count + player.wardrobe2[bullet_name].count
 	end
 	
 	if player.wardrobe3[bullet_name] then
